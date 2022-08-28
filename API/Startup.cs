@@ -48,7 +48,9 @@ namespace API
                         IssuerSigningKey = new SymmetricSecurityKey(keyBytes),
                         ValidateLifetime = true,
                         ValidateAudience = false,
-                        ValidateIssuer = false
+                        ValidateIssuer = false,
+                        // Default value is 5 minutes, so we set to 0 to disable it
+                        ClockSkew = TimeSpan.Zero
                     };
                 });
             // Add the interfaces and classes
