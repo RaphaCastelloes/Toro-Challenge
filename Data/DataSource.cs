@@ -9,8 +9,9 @@ namespace Data
     {
         public static Dictionary<string, string> Users = new Dictionary<string, string>()
         {
-            { "admin", "password" },
-            { "user", "password" }
+            { "castelloesjf@hotmail.com", "password" },
+            { "07519560660", "password"},
+            { "33000167104900", "password"},
         };
     }
 }

@@ -62,6 +62,12 @@ namespace API.JWT
         // Validate if there is this credential in user source
         private bool IsValidCredential(string userName, string password)
         {
+            // Check if userName not contains @
+            if (!userName.Contains("@"))
+            {
+                userName = userName.Replace(".", "").Replace("-", "").Replace("/", "").Replace("\\", "");
+            }
+
             return DataSource.Users.Any(u => u.Key == userName && u.Value == password);
         }
     }
