@@ -7,11 +7,26 @@ namespace Data
 {
     public class DataSource
     {
-        public static Dictionary<string, string> Users = new Dictionary<string, string>()
+        public static List<Usuario> Usuario = new List<Usuario>()
         {
-            { "castelloesjf@hotmail.com", "password" },
-            { "07519560660", "password"},
-            { "33000167104900", "password"},
+            new Usuario()
+            {
+                Id = 1,
+                NumeroConta = "123456-01",
+                Saldo = 1000000.00,
+                CPF = "12345678901",
+                Email = "castelloesjf@hotmail.com",
+                Senha = "password",
+            },
+            new Usuario()
+            {
+                Id = 2,
+                NumeroConta = "123456-02",
+                Saldo = 1000,
+                CPF = "12345678902",
+                Email = "castelloesjf@gmail.com",
+                Senha = "password",
+            },
         };
     }
 }

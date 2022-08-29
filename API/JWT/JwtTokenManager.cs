@@ -68,7 +68,7 @@ namespace API.JWT
                 userName = userName.Replace(".", "").Replace("-", "").Replace("/", "").Replace("\\", "");
             }
 
-            return DataSource.Users.Any(u => u.Key == userName && u.Value == password);
+            return DataSource.Usuario.Any(user => user.Email == userName && user.Senha == password || user.CPF == userName && user.Senha == password);
         }
     }
 }
