@@ -49,9 +49,9 @@ namespace IntegrationTests
             Assert.True(response.IsSuccessStatusCode && response.Content.ReadAsStringAsync().Result == "Authenticated");
         }
 
-        // Test the authentication state method when success
+        // Test the authentication state method with expired token
         [Fact]
-        public void GetAuthState_Fail()
+        public void GetAuthState_ExpiredToken()
         {
             var configuration = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json").Build();
