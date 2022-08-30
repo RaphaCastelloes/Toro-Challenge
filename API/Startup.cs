@@ -40,8 +40,12 @@ namespace API
             ).AddJwtBearer(
                 jwtOptions =>
                 {
+                    // JwtConfiguration key in appsettings.json or appsettings.Development.json
                     var key = Configuration.GetValue<string>("JwtConfig:Key");
+                    // Convert key to byte array
                     var keyBytes = Encoding.UTF8.GetBytes(key);
+
+                    // Define the token validation options
                     jwtOptions.SaveToken = true;
                     jwtOptions.TokenValidationParameters = new TokenValidationParameters()
                     {
@@ -49,16 +53,19 @@ namespace API
                         ValidateLifetime = true,
                         ValidateAudience = false,
                         ValidateIssuer = false,
-                        // Default value is 5 minutes, so we set to 0 to disable it
+                        // Overtime the token lifetime
+                        // Default value is 5 minutes, set to 0 to disable it
                         ClockSkew = TimeSpan.Zero
                     };
                 });
+
             // Add the interfaces and classes
             services.AddSingleton(typeof(IJwtTokenManager), typeof(JwtTokenManager));
 
             // Add the swagger service
             services.AddSwaggerGen();
 
+            // Add the cors rules allowing any origin
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
@@ -72,6 +79,7 @@ namespace API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Enable the cors
             app.UseCors("CorsPolicy");
 
             if (env.IsDevelopment())
@@ -80,6 +88,7 @@ namespace API
 
             }
 
+            // Enable swagger interface
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
@@ -89,17 +98,15 @@ namespace API
 
             app.UseRouting();
 
+            // Enable autentication
             app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
-
-
-
-
         }
     }
 }

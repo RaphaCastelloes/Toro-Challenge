@@ -20,6 +20,7 @@ namespace API.Controllers
             _IJwtTokenManager = IJwtTokenManager;
         }
 
+        // Authentication method
         [AllowAnonymous]
         [HttpPost("Authenticate")]
         public IActionResult Authenticate([FromBody] UserCredential userCredential)
@@ -34,6 +35,7 @@ namespace API.Controllers
             return Ok(token);
         }
 
+        // Returns the authentication state
         [HttpGet("GetAuthenticationState")]
         public IActionResult GetAuthenticationState()
         {

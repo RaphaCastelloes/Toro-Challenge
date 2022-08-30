@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
+    // Representation of the datasource
     public class DataSource
     {
         public static List<Usuario> Usuario = new List<Usuario>()

@@ -7,6 +7,7 @@ namespace UnitTests
 {
     public class JwtTokenManagerTests
     {
+        // Test the authentication method
         [Fact]
         public void Authenticate()
         {
@@ -18,6 +19,7 @@ namespace UnitTests
             Assert.NotNull(token);
         }
 
+        // Test the authentication method when failed
         [Fact]
         public void Authenticate_Fail()
         {

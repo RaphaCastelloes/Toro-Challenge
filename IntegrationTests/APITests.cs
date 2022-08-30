@@ -9,6 +9,7 @@ namespace IntegrationTests
 {
     public class APITests
     {
+        // Test the authentication method
         [Fact]
         public void Authenticate()
         {
@@ -20,6 +21,7 @@ namespace IntegrationTests
             Assert.True(response.IsSuccessStatusCode);
         }
 
+        // Test the authentication state method when failed
         [Fact]
         public void Authenticate_Fail()
         {
@@ -31,6 +33,7 @@ namespace IntegrationTests
             Assert.True(response.StatusCode == System.Net.HttpStatusCode.Unauthorized);
         }
 
+        // Test the authentication state method when success
         [Fact]
         public void GetAuthState()
         {
@@ -43,7 +46,7 @@ namespace IntegrationTests
             var token = response.Content.ReadAsStringAsync().Result;
             client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
             response = client.GetAsync("/api/Token/GetAuthenticationState").Result;
-            Assert.True(response.IsSuccessStatusCode && response.Content.ReadAsStringAsync().Result == "\"Authenticated\"");
+            Assert.True(response.IsSuccessStatusCode && response.Content.ReadAsStringAsync().Result == "Authenticated");
         }
     }
 }

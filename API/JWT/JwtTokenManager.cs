@@ -20,7 +20,7 @@ namespace API.JWT
             _configuration = configuration;
         }
 
-        // Authentication method    
+        // Authentication method implementation    
         public string Authenticate(string userName, string password)
         {
             // Validate user credential
@@ -48,7 +48,8 @@ namespace API.JWT
                 }),
                 // Define the token expiration time
                 Expires = DateTime.UtcNow.AddMinutes(30),
-                // Define the token signing credentials
+
+                // Define the token signing credentials with the key and the criptography algorithm
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(keyBytes), SecurityAlgorithms.HmacSha256Signature)
             };
 
@@ -68,6 +69,7 @@ namespace API.JWT
                 userName = userName.Replace(".", "").Replace("-", "").Replace("/", "").Replace("\\", "");
             }
 
+            // Try to find the user in the user source
             return DataSource.Usuario.Any(user => user.Email == userName && user.Senha == password || user.CPF == userName && user.Senha == password);
         }
     }
