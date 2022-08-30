@@ -36,6 +36,7 @@ namespace API.Controllers
         }
 
         // Returns the authentication state
+        [Authorize]
         [HttpGet("GetAuthenticationState")]
         public IActionResult GetAuthenticationState()
         {

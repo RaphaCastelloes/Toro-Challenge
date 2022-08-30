@@ -46,6 +46,7 @@ namespace API.JWT
                 {
                     new Claim(ClaimTypes.NameIdentifier, userName)
                 }),
+                
                 // Define the token expiration time
                 Expires = DateTime.UtcNow.AddMinutes(30),
 
