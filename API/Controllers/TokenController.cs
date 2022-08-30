@@ -33,5 +33,11 @@ namespace API.Controllers
 
             return Ok(token);
         }
+
+        [HttpGet("GetAuthenticationState")]
+        public IActionResult GetAuthenticationState()
+        {
+            return Ok("Authenticated");
+        }
     }
 }
