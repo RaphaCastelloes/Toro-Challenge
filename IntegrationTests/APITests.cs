@@ -48,5 +48,20 @@ namespace IntegrationTests
             response = client.GetAsync("/api/Token/GetAuthenticationState").Result;
             Assert.True(response.IsSuccessStatusCode && response.Content.ReadAsStringAsync().Result == "Authenticated");
         }
+
+        // Test the authentication state method when success
+        [Fact]
+        public void GetAuthState_Fail()
+        {
+            var configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json").Build();
+            var client = new HttpClient();
+            client.BaseAddress = new Uri(configuration["ApiUrl"]);
+            // Expired token
+            var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiJjYXN0ZWxsb2VzamZAaG90bWFpbC5jb20iLCJuYmYiOjE2NjE4NzM1NTcsImV4cCI6MTY2MTg3NTM1NywiaWF0IjoxNjYxODczNTU3fQ.trtEBBCp2j21nCwtJqZGqKdbpVG3GifLmmQcuI_8VHo";
+            client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            var response = client.GetAsync("/api/Token/GetAuthenticationState").Result;
+            Assert.True(response.StatusCode == System.Net.HttpStatusCode.Unauthorized);
+        }
     }
 }
